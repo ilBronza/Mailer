@@ -1,0 +1,39 @@
+{
+    "name": "ilbronza/mailer",
+    "description": ":mailer creator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davide Bronzini",
+            "email": "davide_bronzini@hotmail.com",
+            "homepage": "https://sistema.srl"
+        }
+    ],
+    "homepage": "https://github.com/ilbronza/mailer",
+    "keywords": ["Laravel", "Mailer"],
+    "require": {
+        "illuminate/support": "~5|~6|~7|~8"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "IlBronza\\Mailer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IlBronza\\Mailer\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IlBronza\\Mailer\\MailerServiceProvider"
+            ],
+            "aliases": {
+                "Mailer": "IlBronza\\Mailer\\Facades\\Mailer"
+            }
+        }
+    }
+}
