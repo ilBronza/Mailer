@@ -27,6 +27,16 @@ class Mailer
 		return $mailerParameters;
 	}
 
+	static function getFromParametersByUsermailer(Usermailer $usermailer) : array
+	{
+		$parameters = static::getMailerParametersByUsermailer($usermailer);
+
+		return [
+			'address' => $parameters['username'],
+			'name' => $parameters['username']
+		];
+	}
+
 	static function getMailerByUsermailer(Usermailer $usermailer) : LaravelMailer
 	{
 		$parameters = static::getMailerParametersByUsermailer($usermailer);
@@ -43,18 +53,35 @@ class Mailer
 		return Usermailer::where('user_id', $userId)->first();
 	}
 
+	static function getFromParametersByUserId(int $userId) : ? array
+	{
+		if(! $usermailer = static::getUsermailerByUserId($userId))
+			throw new \Exception('User mailer data missing. create it');
+
+		return static::getFromParametersByUsermailer($usermailer);
+
+	}
+
 	static function getMailerByUserId(int $userId) : ? LaravelMailer
 	{
 		if(! $usermailer = static::getUsermailerByUserId($userId))
-			return null;
+			throw new \Exception('User mailer data missing. create it');
 
 		return static::getMailerByUsermailer($usermailer);
+	}
+
+	static function getFromParametersByLoggedUser() : ? array
+	{
+		if(! $userId = Auth::id())
+			throw new \Exception('no logged user');
+
+		return static::getFromParametersByUserId($userId);		
 	}
 
 	static function getMailerByLoggedUser() : ? LaravelMailer
 	{
 		if(! $userId = Auth::id())
-			return null;
+			throw new \Exception('no logged user');
 
 		return static::getMailerByUserId($userId);
 	}
