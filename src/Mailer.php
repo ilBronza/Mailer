@@ -45,6 +45,8 @@ class Mailer
 
 		Config::set('mail.mailers.' . $mailerKey, $parameters);
 
+		$mailer = Mail::mailer($mailerKey);
+
 		return Mail::mailer($mailerKey);
 	}
 
