@@ -92,7 +92,7 @@ class CrudUsermailerController extends CRUD
         'deleted',
         'archived',
         'reorder',
-        'stroreReorder'
+        'storeReorder'
     ];
 
     /**
