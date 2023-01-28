@@ -58,7 +58,7 @@ class Mailer
 	static function getFromParametersByUserId(int $userId) : ? array
 	{
 		if(! $usermailer = static::getUsermailerByUserId($userId))
-			throw new \Exception('User mailer data missing. create it');
+			abort(403, _('mailer.yourCurrentUserHasNotMailerSettings'));
 
 		return static::getFromParametersByUsermailer($usermailer);
 
@@ -67,7 +67,7 @@ class Mailer
 	static function getMailerByUserId(int $userId) : ? LaravelMailer
 	{
 		if(! $usermailer = static::getUsermailerByUserId($userId))
-			throw new \Exception('User mailer data missing. create it');
+			abort(403, _('mailer.yourCurrentUserHasNotMailerSettings'));
 
 		return static::getMailerByUsermailer($usermailer);
 	}
