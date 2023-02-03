@@ -77,7 +77,7 @@ class Mailer
 		if(! $userId = Auth::id())
 			throw new \Exception('no logged user');
 
-		return static::getFromParametersByUserId($userId);		
+		return static::getFromParametersByUserId($userId);
 	}
 
 	static function getMailerByLoggedUser() : ? LaravelMailer

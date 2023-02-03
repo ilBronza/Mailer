@@ -88,11 +88,7 @@ class CrudUsermailerController extends CRUD
         'update',
         'create',
         'store',
-        'destroy',
-        'deleted',
-        'archived',
-        'reorder',
-        'storeReorder'
+        'destroy'
     ];
 
     /**
