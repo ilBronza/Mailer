@@ -173,7 +173,7 @@ abstract class SendCustomEmailController extends Controller
 		$validEmails = $this->getEmailsArray();
 
 		$request->validate([
-			'emails' => 'array|required|in:' . implode(",", $validEmails),
+			'emails' => 'array|nullable|in:' . implode(",", $validEmails),
 			'subject' => 'string|required|max:255',
 			'extraemails' => 'array|nullable',
 			'extraemails.*.email' => 'email|nullable',
@@ -181,6 +181,13 @@ abstract class SendCustomEmailController extends Controller
 		]);
 
 		$this->emails = $this->getEmailsByRequest($request);
+
+		if(count($this->emails) == 0)
+		{
+			Ukn::e('You must set at least one email');
+
+			return back();
+		}
 	}
 
 	public function getBodyFromRequest(Request $request) : string
