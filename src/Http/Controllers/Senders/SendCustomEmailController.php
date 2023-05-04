@@ -136,7 +136,7 @@ abstract class SendCustomEmailController extends Controller
                 ])
             );
 
-        $this->form->setSubmitButtonText('ASDASD QWEASD');
+        $this->form->setSubmitButtonText('Invia');
 
 
         // $this->form->addExtraView('innerBottom', 'emails._attachments', ['match' => $match]);
