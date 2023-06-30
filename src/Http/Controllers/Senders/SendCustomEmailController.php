@@ -9,6 +9,8 @@ use IlBronza\Form\Form;
 use IlBronza\Mailer\Mailer;
 use IlBronza\Ukn\Ukn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 abstract class SendCustomEmailController extends Controller
 {
@@ -231,7 +233,11 @@ abstract class SendCustomEmailController extends Controller
 				}
 				catch(\Exception $e)
 				{
-					Ukn::e(__('mailer::mailer.emailFailedTo', ['emailAddress' => $email]));
+					Log::critical($e->getMessage());
+
+					Ukn::e(__('mailer::mailer.emailFailedTo', [
+						'emailAddress' => $email
+					]));
 				}
 			}
 		}
