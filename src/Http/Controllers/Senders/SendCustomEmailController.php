@@ -157,7 +157,7 @@ abstract class SendCustomEmailController extends Controller
 			$extraEmails[] = $extraemail['email'];
 
 		return collect(array_merge(
-					$request->emails,
+					$request->emails ?? [],
 					$extraEmails
 				));
 	}
@@ -209,6 +209,9 @@ abstract class SendCustomEmailController extends Controller
         $this->mailer = $this->getMailer();
 
         $this->emailClass = $this->getEmailClass();
+
+        foreach($this->emails as $email)
+        	$this->client->addEmailsToReferentTypes([$email], ['sped']);
 
 		try
 		{
