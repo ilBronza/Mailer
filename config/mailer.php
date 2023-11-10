@@ -1,4 +1,5 @@
 <?php
 
 return [
+	'active' => true
 ];

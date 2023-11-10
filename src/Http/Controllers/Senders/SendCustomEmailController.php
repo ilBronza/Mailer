@@ -3,6 +3,7 @@
 namespace IlBronza\Mailer\Http\Controllers\Senders;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Generic;
 use App\Mail\StandardEmail;
 use IlBronza\FormField\FormField;
 use IlBronza\Form\Form;
@@ -206,7 +207,8 @@ abstract class SendCustomEmailController extends Controller
 	{
 		$this->validateEmails($request);
 
-        $this->mailer = $this->getMailer();
+        // $this->mailer = $this->getMailer();
+        $this->mailer = Mailer::getMailerByLoggedUser();
 
         $this->emailClass = $this->getEmailClass();
 
@@ -219,17 +221,14 @@ abstract class SendCustomEmailController extends Controller
 			{
 				try
 				{
-					$mail = $this->mailer->to($email);
-
-					foreach($this->getCC() as $cc)
-						$mail->cc($cc);
-
-					$mail->send(
-						(new $this->emailClass(
-							$this->getBodyFromRequest($request),
-							$this->getSubjectFromRequest($request),
-							$this->getFromParameters()
-						))
+					$this->mailer->to($email)
+						->cc(Mailer::getMailerEmailByLoggedUser())
+						->send(
+							(new Generic(
+								$this->getBodyFromRequest($request),
+								$this->getSubjectFromRequest($request)
+							)
+						)
 					);
 
 					Ukn::s(__('mailer::mailer.emailSentTo', ['emailAddress' => $email]));
@@ -238,8 +237,9 @@ abstract class SendCustomEmailController extends Controller
 				{
 					Log::critical($e->getMessage());
 
-					Ukn::e(__('mailer::mailer.emailFailedTo', [
-						'emailAddress' => $email
+					Ukn::e(__('mailer::mailer.emailFailedToBecause', [
+						'emailAddress' => $email,
+						'because' => $e->getMessage()
 					]));
 				}
 			}

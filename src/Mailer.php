@@ -47,6 +47,8 @@ class Mailer
 
 		$mailer = Mail::mailer($mailerKey);
 
+		$mailer->alwaysFrom($parameters['username']);
+
 		return Mail::mailer($mailerKey);
 	}
 
@@ -72,6 +74,14 @@ class Mailer
 		return static::getMailerByUsermailer($usermailer);
 	}
 
+	static function getMailerEmailByUserId(int $userId) : string
+	{
+		if(! $usermailer = static::getUsermailerByUserId($userId))
+			abort(403, _('mailer.yourCurrentUserHasNotMailerSettings'));
+
+		return $usermailer->username;
+	}
+
 	static function getFromParametersByLoggedUser() : ? array
 	{
 		if(! $userId = Auth::id())
@@ -86,5 +96,13 @@ class Mailer
 			throw new \Exception('no logged user');
 
 		return static::getMailerByUserId($userId);
+	}
+
+	static function getMailerEmailByLoggedUser()
+	{
+		if(! $userId = Auth::id())
+			throw new \Exception('no logged user');
+
+		return static::getMailerEmailByUserId($userId);		
 	}
 }

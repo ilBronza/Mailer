@@ -9,7 +9,7 @@ abstract class SendStandardEmailController extends SendCustomEmailController
 {
 	public $cc = [];
 	public $mailerId;
-	public $translatableTitle = 'mailer::mailer.emailSentTo';
+	public $translatableTitle = 'mailer::mailer.emailSending';
 
 	public function getEmailClass() : string
 	{
