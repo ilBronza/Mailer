@@ -46,7 +46,6 @@ class CrudUsermailerController extends CRUD
                 'host' => 'flat',
                 'encryption' => 'flat',
                 'username' => 'flat',
-                'password' => 'flat',
                 'timeout' => 'flat',
                 'auth_mode' => 'flat'
             ]
@@ -66,7 +65,7 @@ class CrudUsermailerController extends CRUD
                 'host' => ['text' => 'string|nullable'],
                 'encryption' => ['text' => 'string|nullable'],
                 'username' => ['text' => 'string|required'],
-                'password' => ['text' => 'string|nullable'],
+                'password' => ['password' => 'string|nullable'],
                 'timeout' => ['text' => 'string|nullable'],
                 'auth_mode' => ['text' => 'string|nullable']
             ]
