@@ -37,6 +37,7 @@ class CrudUsermailerController extends CRUD
 
     public static $tables = [
         'index' => [
+            'translationPrefix' => 'mailer::fields',
             'fields' => 
             [
                 'mySelfEdit' => 'links.edit',
@@ -54,20 +55,23 @@ class CrudUsermailerController extends CRUD
 
     static $formFields = [
         'common' => [
-            'default' => [
-                'user' => [
-                    'type' => 'select',
-                    'multiple' => false,
-                    'rules' => 'required|exists:users,id',
-                    'relation' => 'user'
-                ],
-                'transport' => ['text' => 'string|nullable'],
-                'host' => ['text' => 'string|nullable'],
-                'encryption' => ['text' => 'string|nullable'],
-                'username' => ['text' => 'string|required'],
-                'password' => ['password' => 'string|nullable'],
-                'timeout' => ['text' => 'string|nullable'],
-                'auth_mode' => ['text' => 'string|nullable']
+            'baseData' => [
+                'translationPrefix' => 'mailer::fields',
+                'fields' => [
+                    'user' => [
+                        'type' => 'select',
+                        'multiple' => false,
+                        'rules' => 'required|exists:users,id',
+                        'relation' => 'user'
+                    ],
+                    'transport' => ['text' => 'string|nullable'],
+                    'host' => ['text' => 'string|nullable'],
+                    'encryption' => ['text' => 'string|nullable'],
+                    'username' => ['text' => 'string|required'],
+                    'password' => ['password' => 'string|nullable'],
+                    'timeout' => ['text' => 'string|nullable'],
+                    'auth_mode' => ['text' => 'string|nullable']
+                ]
             ]
         ]
     ];    

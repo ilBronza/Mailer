@@ -60,7 +60,7 @@ class Mailer
 	static function getFromParametersByUserId(int $userId) : ? array
 	{
 		if(! $usermailer = static::getUsermailerByUserId($userId))
-			abort(403, _('mailer.yourCurrentUserHasNotMailerSettings'));
+			abort(403, _('mailers.yourCurrentUserHasNotMailerSettings'));
 
 		return static::getFromParametersByUsermailer($usermailer);
 
@@ -69,7 +69,7 @@ class Mailer
 	static function getMailerByUserId(int $userId) : ? LaravelMailer
 	{
 		if(! $usermailer = static::getUsermailerByUserId($userId))
-			abort(403, _('mailer.yourCurrentUserHasNotMailerSettings'));
+			abort(403, _('mailers.yourCurrentUserHasNotMailerSettings'));
 
 		return static::getMailerByUsermailer($usermailer);
 	}
@@ -77,7 +77,7 @@ class Mailer
 	static function getMailerEmailByUserId(int $userId) : string
 	{
 		if(! $usermailer = static::getUsermailerByUserId($userId))
-			abort(403, _('mailer.yourCurrentUserHasNotMailerSettings'));
+			abort(403, _('mailers.yourCurrentUserHasNotMailerSettings'));
 
 		return $usermailer->username;
 	}
