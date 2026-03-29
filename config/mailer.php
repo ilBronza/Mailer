@@ -1,5 +1,14 @@
 <?php
 
 return [
-	'active' => true
+    'active' => true,
+
+    'defaultRoles' => [
+        'superadmin',
+        'administrator',
+        'mailer',
+    ],
+
+    'routeRoles' => [
+    ],
 ];

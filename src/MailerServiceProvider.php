@@ -2,6 +2,7 @@
 
 namespace IlBronza\Mailer;
 
+use IlBronza\Mailer\Http\Middleware\MailerMiddlewareRolesPermissions;
 use Illuminate\Support\ServiceProvider;
 
 class MailerServiceProvider extends ServiceProvider
@@ -17,6 +18,8 @@ class MailerServiceProvider extends ServiceProvider
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'mailer');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+
+        $this->app['router']->aliasMiddleware('mailer.roles', MailerMiddlewareRolesPermissions::class);
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

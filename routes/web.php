@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-	'middleware' => ['web', 'auth'],
+	'middleware' => ['web', 'auth', 'mailer.roles'],
 	'prefix' => 'ilbronza-mailermanager',
 	'namespace' => 'IlBronza\Mailer\Http\Controllers'
 	],
