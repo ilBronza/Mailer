@@ -17,7 +17,7 @@ class MailerServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'mailer');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'mailer');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/mailer.php');
 
         $this->app['router']->aliasMiddleware('mailer.roles', MailerMiddlewareRolesPermissions::class);
 
